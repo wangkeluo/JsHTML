@@ -1,9 +1,3 @@
-## This is my Read Me file 
-
-name| age|school
-wangkeluo|22|CUHK
-
-
-
-
-this is html
+## READ ME
+ - Collect my JavaScript code for later use. 
+ - Collect great Code snippet from internet. 
