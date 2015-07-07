@@ -1,12 +1,13 @@
-<script src = "./jquery.js"></script>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 <script>
 $(document).keydown(function(e){
 	var $current = e.target.closest("td");
 	var $tr = e.target.closest("tr");
 	var $i = 0;
-	while	(($current.previousSibling)!= null){
-		$current=$current.previousSibling;
+	while	(($current.previousElementSibling)!= null){
+		$current=$current.previousElementSibling;
 		$i++;
 	};
 	var	$parent = $current.parentNode;
