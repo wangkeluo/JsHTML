@@ -1,0 +1,54 @@
+<script src = "./jquery.js"></script>
+
+<script>
+$(document).keydown(function(e){
+	var $current = e.target.closest("td");
+	var $tr = e.target.closest("tr");
+	var $i = 0;
+	while	(($current.previousSibling)!= null){
+		$current=$current.previousSibling;
+		$i++;
+	};
+	var	$parent = $current.parentNode;
+	// up code: 38
+	if (e.keyCode == 38) {
+		var $previous = $parent.previousElementSibling;
+		//get the fist child of the tr node
+		if ($previous !=null) {
+		while($previous.nodeType !=1){
+				$previous=$previous.previousElementSibling;
+		}
+		$td = $previous.firstElementChild;
+		$td.getElementsByTagName("input")[0].focus();
+    //move cursor to right place
+			while ($i > 0){
+				$td.nextElementSibling.getElementsByTagName("input")[0].focus();
+				$td= $td.nextElementSibling;
+				$i=$i-1;
+			}
+
+		};
+
+	};
+	// down code: 40
+	if (e.keyCode == 40) {
+		var $next = $parent.nextElementSibling;
+		//get the fist child of the tr node
+		if ($next !=null) {
+		while($next.nodeType !=1){
+				$next=$next.nextElementSibling;
+		}
+		$td = $next.firstElementChild;
+		$td.getElementsByTagName("input")[0].focus();
+    //move cursor to right place
+			while ($i > 0){
+				$td.nextElementSibling.getElementsByTagName("input")[0].focus();
+				$td= $td.nextElementSibling;
+				$i=$i-1;
+			}
+		};
+	};
+
+});
+
+</script>
