@@ -18,18 +18,10 @@ $(document).keydown(function(e){
 		if ($previous !=null) {
 		while($previous.nodeType !=1){
 				$previous=$previous.previousElementSibling;
-		}
-		$td = $previous.firstElementChild;
-		$td.getElementsByTagName("input")[0].focus();
-    //move cursor to right place
-			while ($i > 0){
-				$td.nextElementSibling.getElementsByTagName("input")[0].focus();
-				$td= $td.nextElementSibling;
-				$i=$i-1;
 			}
-
+		 		getAdjacentNode($previous,$i);
 		};
-
+	
 	};
 	// down code: 40
 	if (e.keyCode == 40) {
@@ -38,18 +30,31 @@ $(document).keydown(function(e){
 		if ($next !=null) {
 		while($next.nodeType !=1){
 				$next=$next.nextElementSibling;
-		}
-		$td = $next.firstElementChild;
-		$td.getElementsByTagName("input")[0].focus();
-    //move cursor to right place
-			while ($i > 0){
-				$td.nextElementSibling.getElementsByTagName("input")[0].focus();
-				$td= $td.nextElementSibling;
-				$i=$i-1;
 			}
+				getAdjacentNode($next,$i);
 		};
 	};
 
 });
 
+function getAdjacentNode($rowNode,$i){
+
+		$td = $rowNode.firstElementChild;
+		while($td.getElementsByTagName("input")[0] == null){
+			$td = $td.nextElementSibling;
+			$i=$i-1;
+		}
+		$td.getElementsByTagName("input")[0].focus();
+    //move cursor to right place
+			while ($i > 0){
+				if ($td.nextElementSibling.getElementsByTagName("input")[0] == null) {
+				$td= $td.nextElementSibling;
+				}
+				else {
+				$td.nextElementSibling.getElementsByTagName("input")[0].focus();
+				$td= $td.nextElementSibling;
+				}
+				$i=$i-1;
+			}
+}
 </script>
