@@ -85,7 +85,7 @@
 
   function UploadFile(file) {
     var xhr = new XMLHttpRequest();
-    if (xhr.upload && file.type === "image/png" && file.size <= $id("MAX_FILE_SIZE").value) {
+    if (xhr.upload && file.size <= $id("MAX_FILE_SIZE").value) {
       // create progress bar
       var o = $id("progress");
       var progress = o.appendChild(document.createElement("p"));
@@ -107,7 +107,12 @@
 
       xhr.open("POST", $id("upload").action, true);
       xhr.setRequestHeader("X_FILENAME", file.name);
+      xhr.setRequestHeader("X-File-Name", file.name || file.fileName);
+      xhr.setRequestHeader("HTTP_X_FILENAME", file.name || file.fileName);
       xhr.send(file);
+    }
+    else{
+      Output("<p>File is over size.</p>");
     }
   }
 
