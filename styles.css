@@ -51,6 +51,7 @@ legend
 img
 {
   max-width: 100%;
+/*Make image shown in block and show in the middle*/
   display: block;
   margin: 0 auto;
 }

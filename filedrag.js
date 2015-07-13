@@ -27,8 +27,11 @@
 
     // process all File objects
     for (var i = 0, numFiles = files.length; i < numFiles; i++) {
-      f= files[i];
+      f = files[i];
       ParseFile(f);
+      //console.log("File shown");
+      UploadFile(f);
+      //console.log("file upload");
     }
 
   }
@@ -66,18 +69,46 @@
       };
       reader.readAsDataURL(file);
     }
-/*
-    if (file.type.indexOf("application") === 0) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        Output(
-          "<p><strong>" + file.name + ":</strong><br />" +
-          '<img src="' + e.target.result + '" /></p>'
-        );
+    /*
+        if (file.type.indexOf("application") === 0) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            Output(
+              "<p><strong>" + file.name + ":</strong><br />" +
+              '<img src="' + e.target.result + '" /></p>'
+            );
+          };
+          reader.readAsBinaryString(file);
+        }
+    */
+  }
+
+  function UploadFile(file) {
+    var xhr = new XMLHttpRequest();
+    if (xhr.upload && file.type === "image/png" && file.size <= $id("MAX_FILE_SIZE").value) {
+      // create progress bar
+      var o = $id("progress");
+      var progress = o.appendChild(document.createElement("p"));
+      progress.appendChild(document.createTextNode("upload " + file.name));
+
+
+      // progress bar
+      xhr.upload.addEventListener("progress", function(e) {
+        var pc = parseInt(100 - (e.loaded / e.total * 100));
+        progress.style.backgroundPosition = pc + "% 0";
+      }, false);
+
+      // file received/failed
+      xhr.onreadystatechange = function(e) {
+        if (xhr.readyState == 4) {
+          progress.className = (xhr.status == 200 ? "success" : "failure");
+        }
       };
-      reader.readAsBinaryString(file);
+
+      xhr.open("POST", $id("upload").action, true);
+      xhr.setRequestHeader("X_FILENAME", file.name);
+      xhr.send(file);
     }
-*/
   }
 
 
