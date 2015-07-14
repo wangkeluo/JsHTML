@@ -111,6 +111,9 @@
       xhr.send(file);
      
     }
+    else{
+      Output("<p>File is over size.</p>");
+    }
   }
 
 
