@@ -85,7 +85,7 @@
 
   function UploadFile(file) {
     var xhr = new XMLHttpRequest();
-    if (xhr.upload && file.type === "image/png" && file.size <= $id("MAX_FILE_SIZE").value) {
+    if (xhr.upload && file.size <= $id("MAX_FILE_SIZE").value) {
       // create progress bar
       var o = $id("progress");
       var progress = o.appendChild(document.createElement("p"));
@@ -102,12 +102,14 @@
       xhr.onreadystatechange = function(e) {
         if (xhr.readyState == 4) {
           progress.className = (xhr.status == 200 ? "success" : "failure");
+          console.log(xhr.responseText);
         }
       };
 
       xhr.open("POST", $id("upload").action, true);
-      xhr.setRequestHeader("X_FILENAME", file.name);
+      xhr.setRequestHeader("X-FILENAME", file.name);
       xhr.send(file);
+     
     }
   }
 

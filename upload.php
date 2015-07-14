@@ -1,12 +1,19 @@
 <?php
-$fn = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME']:false);
+$fn = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
 if ($fn) {
+
   // AJAX call
-  file_put_contents('uploads/' . $fn, file_get_contents('php://input'));
+  file_put_contents(
+    'uploads/' . $fn,
+    file_get_contents('php://input')
+  );
   echo "$fn uploaded";
   exit();
+  
 }
-else{
+
+else {
+
   // form submit
   $files = $_FILES['fileselect'];
 
@@ -20,5 +27,6 @@ else{
       echo "<p>File $fn uploaded.</p>";
     }
   }
+
 }
 ?>
