@@ -5,4 +5,4 @@
  - Show specific file content
  - show a progress bar
  
- > Ref: http://www.sitepoint.com/html5-file-drag-and-drop/
+ > Ref: [XMLHttpRequest phase 2](http://www.sitepoint.com/html5-file-drag-and-drop/)
