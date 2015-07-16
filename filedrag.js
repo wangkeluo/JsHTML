@@ -85,6 +85,7 @@
 
   function UploadFile(file) {
     var xhr = new XMLHttpRequest();
+    // it is a better practice that put file size check on server side,ie,php.
     if (xhr.upload && file.size <= $id("MAX_FILE_SIZE").value) {
       // create progress bar
       var o = $id("progress");
@@ -105,7 +106,7 @@
           console.log(xhr.responseText);
         }
       };
-
+      //ajax
       xhr.open("POST", $id("upload").action, true);
       xhr.setRequestHeader("X-FILENAME", file.name);
       xhr.send(file);
@@ -138,7 +139,7 @@
       filedrag.style.display = "block";
 
       // remove submit button
-      submitbutton.style.display = "none";
+      submitbutton.style.display = "block";
     }
 
   }
