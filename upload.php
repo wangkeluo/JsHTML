@@ -1,9 +1,10 @@
 <?php 
 $fn = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
+$link = (isset($_SERVER['HTTP_X_FILELINK']) ? $_SERVER['HTTP_X_FILELINK'] : false);
+
 date_default_timezone_set("Asia/Hong_Kong"); 
 
-if ($fn) {
-
+if (isset($fn) and $link != "undefined"){
   /*
     AJAX call
     If filename does not exist, the file is created. Otherwise, the existing file is overwritten, unless the FILE_APPEND flag is set.\
@@ -15,11 +16,21 @@ if ($fn) {
     php://input is a read-only stream that allows you to read raw data from the request body
     php://input is not available with enctype="multipart/form-data". 
   */
-    file_get_contents('php://input')
+    //file_get_contents('php://input')
+    file_get_contents($link)
   );
+  //echo file_get_contents($link);
+  echo "$fn uploaded";
+  exit();  
+}
+
+elseif (isset($fn)) {
+  file_put_contents(
+    'uploads/'.time(). $fn,
+    file_get_contents('php://input')
+    );
   echo "$fn uploaded";
   exit();
-  
 }
 
 else {

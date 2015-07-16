@@ -2,7 +2,10 @@
 <head>
   <meta charset = "utf-8">
   <link rel="stylesheet" type="text/css" media="all" href="styles.css" />
-  <title>HTML5 File Upload</title>
+  <title>HTML5 File Upload</title>  
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- DATE RANGE PICKER -->
+
 </head>
 <body>
   <!--form is used to send data to server. It contains inpit, menus,textarea,fieldset,legend,labal etc.-->
@@ -25,10 +28,31 @@
     </fieldset>
 </form>
 <div id="progress"></div>
+
+<fieldset>
+  <legend>Dropbox Drop-ins</legend>
+  <div id ="dropbox">
+  <!--Ref:https://www.dropbox.com/developers/dropins/chooser/js-->
+  </div>
+</fieldset>
+<p></p>
+<p></p>
+
+<fieldset>
+  <legend>Dropbox oAuth2.0</legend>
+  <div id ="dropbox2">
+  <!--Ref:https://www.dropbox.com/developers/reference/oauthguide-->
+  <button id = "ConnectBtn2"><i class = "fa fa-dropbox"></i>Connect to DropBox</button>
+  <button id = "OpenBtn2"><i class = "fa fa-folder-open"></i>Open from DropBox</button>
+  <button id = "SaveBtn2"><i class = "fa fa-cloud-upload"></i>Upload to DropBox</button>
+  </div>
+</fieldset>
 <div id="messages">
 <p>Status Messages</p>
 </div>
+<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="rjay97puiv07dza"></script>
 <script src="filedrag.js"></script>
+
 </body>
 
 </html>
