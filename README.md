@@ -5,4 +5,8 @@
  - Show specific file content
  - show a progress bar
  
- > Ref: http://www.sitepoint.com/html5-file-drag-and-drop/
+ > Ref: [XMLHttpRequest phase 2](http://www.sitepoint.com/html5-file-drag-and-drop/)
+
+### How to test
+ - Clone the entire branch into your environment
+ - Put the folder into your web server
