@@ -68,7 +68,7 @@
   function UploadFile(file) {
     var xhr = new XMLHttpRequest();
     // it is a better practice that put file size check on server side,ie,php.
-    if (xhr.upload ) {
+    if (xhr.upload) {
       // create progress bar
       var o = $id("progress");
       var progress = o.appendChild(document.createElement("p"));
@@ -106,9 +106,10 @@
       // Required. Called when a user selects an item in the Chooser.
       success: function(files) {
         // do some thing
-         for (var i = files.length -1; i >= 0; i--) {
+        for (var i = files.length - 1; i >= 0; i--) {
           UploadFile(files[i]);
-         };
+        };
+        InitSaveBox(files);
         //alert("Here's the file link: " + files[0].link)
       },
 
@@ -136,6 +137,62 @@
     document.getElementById("dropbox").appendChild(button);
   }
 
+  function InitSaveBox(Savefiles) {
+
+    var options = {
+      files: [
+        // You can specify up to 100 files.
+        // {
+        //   'url': Savefiles[0].link,
+        //   'filename': Savefiles[0].name
+        // }, 
+
+        // {
+        //    'url': '...',
+        //    'filename': '...'
+        // },
+      ],
+
+      // Success is called once all files have been successfully added to the user's
+      // Dropbox, although they may not have synced to the user's devices yet.
+      success: function() {
+        // Indicate to the user that the files have been saved.
+        //alert("Success! Files saved to your Dropbox.");
+        console.log("Files save into dropbox");
+      },
+
+      // Progress is called periodically to update the application on the progress
+      // of the user's downloads. The value passed to this callback is a float
+      // between 0 and 1. The progress callback is guaranteed to be called at least
+      // once with the value 1.
+      progress: function(progress) {},
+
+      // Cancel is called if the user presses the Cancel button or closes the Saver.
+      cancel: function() {
+        console.log("Saving process is cancalled");
+      },
+
+      // Error is called in the event of an unexpected response from the server
+      // hosting the files, such as not being able to find a file. This callback is
+      // also called if there is an error on Dropbox or if the user is over quota.
+      error: function(errorMessage) {
+        console.log(errorMessage);
+      }
+    };
+
+    for (var i = Savefiles.length - 1; i >= 0; i--) {
+      var element = {
+        'url': Savefiles[i].link,
+        'filename': Savefiles[i].name
+      };
+      // use array.push(element1,element2...) to add element dynamically
+      options.files.push(element);
+    };
+
+    var button = Dropbox.createSaveButton(options);
+    document.getElementById("dropbox").appendChild(button);
+  }
+
   // file selection
   function FileSelectHandler(e) {
 
@@ -158,6 +215,7 @@
 
   function Init() {
     InitDropBox();
+    //InitSaveBox();
     var fileselect = $id("fileselect"),
       filedrag = $id("filedrag"),
       submitbutton = $id("submitbutton");
