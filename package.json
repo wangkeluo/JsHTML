@@ -1,0 +1,8 @@
+{
+	"name": "oAuth2.0-Dropbox",
+	"version": "0.1.0",
+	"dependencies": {
+		"dbox": "0.6.4",
+		"open": "0.0.5"
+	}
+}
